@@ -26,9 +26,11 @@ public class UtenteClient {
 
     private WebTarget webTarget;
     private Client client;
-    private static final String BASE_URI = "http://localhost:8080/ServiceA-web/webresources";
+    //private static final String BASE_URI = "http://localhost:8080/ServiceA-web/webresources";
+    private static final String BASE_URI = System.getProperty("SERVICE_URI");
 
     public UtenteClient() {
+    		
         client = javax.ws.rs.client.ClientBuilder.newClient();
         webTarget = client.target(BASE_URI).path("utentes");
     }
