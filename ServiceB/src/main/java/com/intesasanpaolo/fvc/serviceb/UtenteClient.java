@@ -27,11 +27,20 @@ public class UtenteClient {
     private WebTarget webTarget;
     private Client client;
     //private static final String BASE_URI = "http://localhost:8080/ServiceA-web/webresources";
-    private static final String BASE_URI = System.getProperty("SERVICE_URI");
+    private static String BASE_URI = System.getProperty("SERVICE_URI");
 
     public UtenteClient() {
-    		
-        client = javax.ws.rs.client.ClientBuilder.newClient();
+    	System.out.println("BASE_URI 1 " + BASE_URI);
+    	if(BASE_URI ==null){
+    		BASE_URI =System.getenv("SERVICE_URI");
+    		System.out.println("BASE_URI 2 " + BASE_URI);
+    	}
+    	if(BASE_URI ==null){
+    		BASE_URI ="http://jaxrstest:8080/ServiceA-web/webresources";
+    		System.out.println("BASE_URI 3 " + BASE_URI);
+    	}
+    	
+    	client = javax.ws.rs.client.ClientBuilder.newClient();
         webTarget = client.target(BASE_URI).path("utentes");
     }
 
@@ -49,3 +58,4 @@ public class UtenteClient {
     }
     
 }
+ 
